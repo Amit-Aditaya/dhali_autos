@@ -41,13 +41,13 @@ export default function GallerySection() {
         </p>
       </div>
 
-      <div className="mt-12 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="mt-12 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 auto-rows-[minmax(16rem,1fr)]">
         {galleryImages.map(image => (
           <figure
             key={image.alt}
-            className={`group overflow-hidden rounded-3xl border border-white/5 bg-white/5 ${image.span ?? ''}`}
+            className={`group h-full overflow-hidden rounded-3xl border border-white/5 bg-white/5 ${image.span ?? ''}`}
           >
-            <div className="relative h-64 w-full sm:h-72">
+            <div className="relative h-full w-full min-h-[16rem] sm:min-h-[18rem]">
               <Image
                 src={image.src}
                 alt={image.alt}

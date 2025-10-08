@@ -1,20 +1,20 @@
 # DhaliAutos Project Setup & Run Guide
 
 1. Navigate to the project root:
-   cd "/Users/amitaditaya/Projects/flutter projects /Dhali_Autos/begautos-clone"
+   cd "/Users/hello/Projects/NextJS/dhali_autos/dhali_autos"
 
 2. Ensure the local Node.js toolchain is on PATH for this session:
-   PATH="/Users/amitaditaya/Projects/flutter projects /Dhali_Autos/nodejs/node-v20.17.0-darwin-arm64/bin:$PATH"
+   PATH="/Users/hello/Projects/NextJS/dhali_autos/nodejs/node-v20.17.0-darwin-arm64/bin:$PATH"
 
 3. Install dependencies (only required the first time or after package changes):
-   PATH="/Users/amitaditaya/Projects/flutter projects /Dhali_Autos/nodejs/node-v20.17.0-darwin-arm64/bin:$PATH" npm install
+   PATH="/Users/hello/Projects/NextJS/dhali_autos/nodejs/node-v20.17.0-darwin-arm64/bin:$PATH" npm install
 
 4. Start the development server:
-   PATH="/Users/amitaditaya/Projects/flutter projects /Dhali_Autos/nodejs/node-v20.17.0-darwin-arm64/bin:$PATH" npm run dev
+   PATH="/Users/hello/Projects/NextJS/dhali_autos/nodejs/node-v20.17.0-darwin-arm64/bin:$PATH" npm run dev
    # The app will be available at http://localhost:3000
 
 5. To create a production build:
-   PATH="/Users/amitaditaya/Projects/flutter projects /Dhali_Autos/nodejs/node-v20.17.0-darwin-arm64/bin:$PATH" npm run build
+   PATH="/Users/hello/Projects/NextJS/dhali_autos/nodejs/node-v20.17.0-darwin-arm64/bin:$PATH" npm run build
 
 6. To run the production server after building:
-   PATH="/Users/amitaditaya/Projects/flutter projects /Dhali_Autos/nodejs/node-v20.17.0-darwin-arm64/bin:$PATH" npm run start
+   PATH="/Users/hello/Projects/NextJS/dhali_autos/nodejs/node-v20.17.0-darwin-arm64/bin:$PATH" npm run start
