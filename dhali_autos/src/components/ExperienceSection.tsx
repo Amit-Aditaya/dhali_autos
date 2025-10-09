@@ -25,7 +25,7 @@ export default function ExperienceSection() {
   return (
     <section className="container-responsive py-20" id="experience">
       <div className="mx-auto max-w-5xl text-center">
-        <h2 className="section-heading">The DhaliAutos experience, reimagined.</h2>
+        <h2 className="section-heading">The Dhali Autos experience, reimagined.</h2>
         <p className="section-subtitle mx-auto mt-4">
           Ownership is a journey, not a transaction. From pre-order reconnaissance to aftercare orchestration,
           we choreograph every touchpoint so the vehicle mirrors the lifestyle you lead.

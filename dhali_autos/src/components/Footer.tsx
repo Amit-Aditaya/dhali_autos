@@ -138,7 +138,7 @@ export default function Footer() {
               </div>
             </form>
             <p className="mb-6 text-justify text-gray-300">
-              Join the DhaliAutos circle for launch previews, limited allocations, and private driving events curated for our clients.
+              Join the Dhali Autos circle for launch previews, limited allocations, and private driving events curated for our clients.
             </p>
             <div className="flex space-x-4">
               {socials.map(social => (

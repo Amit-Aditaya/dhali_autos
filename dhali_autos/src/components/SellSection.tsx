@@ -16,7 +16,7 @@ const steps = [
   {
     title: 'Effortless handover & settlement',
     description:
-      'DhaliAutos handles detailing, photography, buyer screenings, and documentation so funds are cleared without disrupting your schedule.',
+      'Dhali Autos handles detailing, photography, buyer screenings, and documentation so funds are cleared without disrupting your schedule.',
     accent: '03'
   }
 ];
@@ -24,10 +24,10 @@ const steps = [
 export default function SellSection() {
   return (
     <section className="container-responsive py-24" id="sell">
-      <div className="glass-card grid items-center gap-12 overflow-hidden rounded-[2.25rem] border border-white/10 bg-slate-900/60 px-10 py-16 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
+      <div className="glass-card flex flex-col gap-12 overflow-hidden rounded-[2.25rem] border border-white/10 bg-slate-900/60 px-6 py-12 sm:px-8 sm:py-14 lg:grid lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:items-center lg:px-10 lg:py-16">
         <div className="relative h-full">
           <div className="absolute inset-0 -left-10 rounded-full bg-gradient-to-br from-sky-500/30 to-indigo-500/10 blur-3xl" />
-          <div className="relative z-10 max-w-md space-y-5">
+          <div className="relative z-10 mx-auto max-w-md space-y-5 text-center sm:text-left">
             <span className="rounded-full bg-white/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.4em] text-sky-200">
               Sell your car
             </span>
@@ -35,20 +35,20 @@ export default function SellSection() {
               Premium exits for extraordinary machines.
             </h2>
             <p className="text-sm leading-relaxed text-slate-200 md:text-base">
-              Whether you are upgrading or rebalancing your collection, DhaliAutos activates a global network of
+              Whether you are upgrading or rebalancing your collection, Dhali Autos activates a global network of
               qualified buyers while protecting your privacy. We engineer outcomes that honour the care you invested
               in your vehicle.
             </p>
             <div className="rounded-2xl border border-white/10 bg-white/5 p-4 text-xs text-slate-300">
               <strong className="text-white">Fast-track option:</strong> we can table verified offers within 72 hours for
-              vehicles that meet DhaliAutos provenance standards.
+              vehicles that meet Dhali Autos provenance standards.
             </div>
           </div>
         </div>
 
-        <div className="relative">
+        <div className="relative mx-auto w-full max-w-3xl">
           <div className="absolute -top-16 -right-20 hidden h-48 w-48 rounded-full bg-sky-500/20 blur-3xl md:block" />
-          <div className="relative grid gap-6">
+          <div className="relative grid gap-6 sm:grid-cols-2">
             {steps.map(step => (
               <div key={step.title} className="rounded-2xl border border-white/10 bg-white/5 p-6 shadow-lg shadow-slate-950/40">
                 <span className="text-sm font-semibold uppercase tracking-[0.5em] text-sky-200/90">{step.accent}</span>
@@ -88,7 +88,7 @@ export default function SellSection() {
         </div> */}
 
         <div className="sm:col-span-2">
-          <div className="mt-12 rounded-[2.25rem] border border-white/10 bg-slate-900/70 p-8 shadow-lg shadow-slate-950/40">
+          <div className="rounded-[2.25rem] border border-white/10 bg-slate-900/70 p-6 shadow-lg shadow-slate-950/40 sm:p-8 lg:mt-12">
             <div className="mx-auto max-w-3xl space-y-6 text-center text-slate-200">
               <h3 className="text-2xl font-semibold text-white md:text-3xl">Share your vehicle with our concierge</h3>
               <p className="text-sm leading-relaxed md:text-base">

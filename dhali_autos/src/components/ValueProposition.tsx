@@ -38,7 +38,7 @@ const features = [
     icon: 'trading',
     title: 'Lifecycle concierge',
     description:
-      'From bespoke detailing to performance upgrades, we orchestrate trusted partners who uphold the DhaliAutos standard.'
+      'From bespoke detailing to performance upgrades, we orchestrate trusted partners who uphold the Dhali Autos standard.'
   },
   {
     icon: 'transparent',
@@ -52,7 +52,7 @@ export default function ValueProposition() {
   return (
     <section className="container-responsive pb-24">
       <div className="mx-auto max-w-5xl text-center">
-        <h2 className="section-heading">The DhaliAutos promises.</h2>
+        <h2 className="section-heading">The Dhali Autos promises.</h2>
         <p className="section-subtitle mx-auto mt-4">
           Four commitments anchor every proposal we share—ensuring confidence before keys exchange hands
           and long after the first drive.

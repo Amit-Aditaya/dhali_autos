@@ -11,7 +11,7 @@ export default function ConsultationBanner() {
               Private viewing
             </span>
             <h2 className="text-3xl font-semibold text-white md:text-4xl">
-              Let&apos;s script your DhaliAutos delivery moment.
+              Let&apos;s script your Dhali Autos delivery moment.
             </h2>
             <p className="text-sm leading-relaxed text-slate-200 md:text-base">
               Tell us about your next acquisition or collection goals. Our concierge will curate a bespoke preview,

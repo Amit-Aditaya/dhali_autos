@@ -27,7 +27,7 @@ export default function AboutSection() {
             Born in Dhaka, engineered for those who demand nuance from every drive.
           </h2>
           <p className="text-base text-slate-200 md:text-lg">
-            DhaliAutos was founded to fill the gap between mass-market showrooms and the expectations of
+            Dhali Autos was founded to fill the gap between mass-market showrooms and the expectations of
             Bangladesh’s discerning motorists. Our team blends global sourcing intelligence with a hospitality
             mindset, ensuring every curation reflects your personal cadence—whether it is a weekend escape or a
             daily statement.

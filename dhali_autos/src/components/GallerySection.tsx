@@ -12,7 +12,7 @@ const galleryImages = [
   },
   {
     src: '/images/gle53-dashboard.jpg',
-    alt: 'Mercedes dashboard craftsmanship'
+    alt: 'Mercedes craftsmanship'
   },
   {
     src: '/images/gle53-front.png',
@@ -34,7 +34,7 @@ export default function GallerySection() {
   return (
     <section className="container-responsive pb-24" id="gallery">
       <div className="mx-auto max-w-5xl text-center">
-        <h2 className="section-heading">A glimpse inside the DhaliAutos vault.</h2>
+        <h2 className="section-heading">A glimpse inside the Dhali Autos vault.</h2>
         <p className="section-subtitle mx-auto mt-4">
           Each gallery session is directed by our creative team to honour the silhouette, materials, and
           provenance of every vehicle before it meets its new custodian.
