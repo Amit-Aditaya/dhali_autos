@@ -3,7 +3,7 @@ import Link from 'next/link';
 const stats = [
   { value: '120+', label: 'Handpicked premium vehicles delivered' },
   { value: '48hr', label: 'Swift concierge support response time' },
-  { value: '15+', label: 'Years championing Dhaka motorists' }
+  { value: '15+', label: 'Years championing Dhaka motor fanatics' }
 ];
 
 export default function Hero() {
