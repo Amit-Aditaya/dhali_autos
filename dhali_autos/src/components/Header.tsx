@@ -16,7 +16,7 @@ export default function Header() {
     <header className="header fixed top-0 left-0 right-0 z-50 mx-auto mt-6 w-[92%] rounded-2xl px-6 py-4 shadow-[0_20px_60px_rgba(15,23,42,0.45)]">
       <div className="flex items-center justify-between">
         <Link href="/" className="flex flex-col font-semibold tracking-wide text-white">
-          <span className="text-lg leading-none">DhaliAutos</span>
+          <span className="text-lg leading-none">DHALI AUTOS</span>
           <span className="text-[11px] uppercase tracking-[0.4em] text-sky-300/70">
             Curated Luxury Fleet
           </span>

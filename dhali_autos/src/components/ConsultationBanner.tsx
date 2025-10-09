@@ -23,11 +23,11 @@ export default function ConsultationBanner() {
           <div className="flex flex-col items-start gap-4 text-sm text-slate-200">
             <div>
               <p className="text-xs uppercase tracking-[0.35em] text-sky-200">Concierge desk</p>
-              <p className="mt-2 font-semibold text-white">+880 1788-550550</p>
-              <p className="text-slate-300">Daily · 10:00–20:00 GMT+6</p>
+              <p className="mt-2 font-semibold text-white">+8801625077554</p>
+              <p className="text-slate-300">Daily · 10:00 AM - 11:00 PM</p>
             </div>
             <Link
-              href="mailto:hello@dhaliautos.com?subject=Schedule%20a%20DhaliAutos%20consultation"
+              href="mailto:dhaliautos@gmail.com?subject=Schedule%20a%20DhaliAutos%20consultation"
               className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-sky-400 to-indigo-500 px-6 py-3 text-xs font-semibold uppercase tracking-[0.4em] text-slate-900 shadow-lg shadow-sky-900/40 transition hover:from-sky-300 hover:to-indigo-400"
             >
               Schedule consultation
@@ -36,7 +36,7 @@ export default function ConsultationBanner() {
               </svg>
             </Link>
             <p className="text-xs text-slate-400">
-              Prefer WhatsApp? Message us at <span className="font-semibold text-sky-200">+880 1717-880088</span>.
+              Prefer WhatsApp? Message us at <span className="font-semibold text-sky-200">+8801625077554</span>.
             </p>
           </div>
         </div>
