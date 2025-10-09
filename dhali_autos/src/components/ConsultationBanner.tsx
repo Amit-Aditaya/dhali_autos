@@ -35,9 +35,14 @@ export default function ConsultationBanner() {
                 <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14M12 5l7 7-7 7" />
               </svg>
             </Link>
-            <p className="text-xs text-slate-400">
+            <Link
+              href="https://wa.me/8801625077554"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-xs text-slate-400 transition hover:text-sky-200"
+            >
               Prefer WhatsApp? Message us at <span className="font-semibold text-sky-200">+8801625077554</span>.
-            </p>
+            </Link>
           </div>
         </div>
       </div>
