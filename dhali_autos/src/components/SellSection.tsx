@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import SellForm from './SellForm';
 
 const steps = [
   {
@@ -59,7 +59,7 @@ export default function SellSection() {
           </div>
         </div>
 
-        <div className="relative mt-10 overflow-hidden rounded-3xl border border-white/10 bg-white/5 sm:-mb-10 sm:col-span-2">
+        {/* <div className="relative mt-10 overflow-hidden rounded-3xl border border-white/10 bg-white/5 sm:-mb-10 sm:col-span-2">
           <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/10 to-transparent" />
           <Image
             src="/images/c200-detail.jpg"
@@ -84,6 +84,21 @@ export default function SellSection() {
                 <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14M12 5l7 7-7 7" />
               </svg>
             </a>
+          </div>
+        </div> */}
+
+        <div className="sm:col-span-2">
+          <div className="mt-12 rounded-[2.25rem] border border-white/10 bg-slate-900/70 p-8 shadow-lg shadow-slate-950/40">
+            <div className="mx-auto max-w-3xl space-y-6 text-center text-slate-200">
+              <h3 className="text-2xl font-semibold text-white md:text-3xl">Share your vehicle with our concierge</h3>
+              <p className="text-sm leading-relaxed md:text-base">
+                Submit the details below and our team will review your vehicle profile before contacting you with the best
+                consignment strategy.
+              </p>
+            </div>
+            <div className="mx-auto mt-10 max-w-3xl">
+              <SellForm />
+            </div>
           </div>
         </div>
       </div>

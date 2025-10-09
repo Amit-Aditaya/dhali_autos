@@ -1,12 +1,12 @@
+import AboutSection from '@/components/AboutSection';
+import ConsultationBanner from '@/components/ConsultationBanner';
+import ExperienceSection from '@/components/ExperienceSection';
+import Footer from '@/components/Footer';
+import GallerySection from '@/components/GallerySection';
 import Header from '@/components/Header';
 import Hero from '@/components/Hero';
-import AboutSection from '@/components/AboutSection';
-import ExperienceSection from '@/components/ExperienceSection';
 import SellSection from '@/components/SellSection';
-import GallerySection from '@/components/GallerySection';
 import ValueProposition from '@/components/ValueProposition';
-import ConsultationBanner from '@/components/ConsultationBanner';
-import Footer from '@/components/Footer';
 
 export default function HomePage() {
   return (
@@ -16,9 +16,9 @@ export default function HomePage() {
         <Hero />
         <AboutSection />
         <ExperienceSection />
+        <ValueProposition />
         <SellSection />
         <GallerySection />
-        <ValueProposition />
         <ConsultationBanner />
       </main>
       <Footer />
