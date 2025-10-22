@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 
@@ -15,11 +16,24 @@ export default function Header() {
   return (
     <header className="header fixed top-0 left-0 right-0 z-50 mx-auto mt-6 w-[92%] rounded-2xl px-6 py-4 shadow-[0_20px_60px_rgba(15,23,42,0.45)]">
       <div className="flex items-center justify-between">
-        <Link href="/" className="flex flex-col font-semibold tracking-wide text-white">
-          <span className="text-lg leading-none">DHALI AUTOS</span>
-          <span className="text-[11px] uppercase tracking-[0.4em] text-sky-300/70">
-            Curated Luxury Fleet
-          </span>
+        <Link
+          href="/"
+          className="flex items-center gap-3 font-semibold tracking-wide text-white"
+        >
+          <Image
+            src="/images/dhali_autos_logo.png"
+            alt="Dhali Autos logo"
+            width={40}
+            height={40}
+            className="h-10 w-10"
+            priority
+          />
+          <div className="flex flex-col">
+            <span className="text-lg leading-none">DHALI AUTOS</span>
+            <span className="text-[11px] uppercase tracking-[0.4em] text-sky-300/70">
+              Curated Luxury Fleet
+            </span>
+          </div>
         </Link>
 
         <nav className="hidden items-center gap-10 md:flex">
