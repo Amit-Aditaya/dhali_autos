@@ -30,12 +30,31 @@ export default function SellForm() {
 
   const handleFilesChange = (event: ChangeEvent<HTMLInputElement>) => {
     const fileList = event.target.files;
-    if (!fileList) {
-      setImages([]);
+    if (!fileList || fileList.length === 0) {
       return;
     }
 
-    setImages(Array.from(fileList).slice(0, 10));
+    const incomingFiles = Array.from(fileList);
+
+    setImages(prevImages => {
+      const merged = [...prevImages, ...incomingFiles];
+      const unique: File[] = [];
+      const seen = new Set<string>();
+
+      for (const file of merged) {
+        const identifier = `${file.name}-${file.size}-${file.lastModified}`;
+        if (seen.has(identifier)) continue;
+        seen.add(identifier);
+        unique.push(file);
+        if (unique.length === 10) break;
+      }
+
+      return unique;
+    });
+  };
+
+  const removeImage = (index: number) => {
+    setImages(prevImages => prevImages.filter((_, i) => i !== index));
   };
 
   const resetForm = () => {
@@ -212,7 +231,7 @@ export default function SellForm() {
             value={values.askingPrice}
             onChange={updateField('askingPrice')}
             className="mt-2 rounded-md border border-white/10 bg-white/5 px-4 py-3 text-white outline-none transition focus:border-sky-400/60 focus:ring-2 focus:ring-sky-500/30"
-            placeholder="$250,000"
+            placeholder="BDT 250,000"
             name="askingPrice"
             type="text"
             disabled={isSubmitting}
@@ -248,12 +267,25 @@ export default function SellForm() {
         </label>
         {images.length > 0 && (
           <ul className="mt-4 space-y-2 text-xs text-slate-300">
-            {images.map(file => (
-              <li key={file.name} className="flex items-center justify-between gap-3 break-words">
-                <span className="truncate">{file.name}</span>
-                <span className="whitespace-nowrap text-slate-400">{Math.round(file.size / 1024)} KB</span>
-              </li>
-            ))}
+            {images.map((file, index) => {
+              const identifier = `${file.name}-${file.size}-${file.lastModified}`;
+              return (
+                <li key={identifier} className="flex items-center gap-3 rounded-lg border border-white/10 bg-white/5 px-3 py-2">
+                  <div className="min-w-0 flex-1">
+                    <p className="truncate text-slate-200">{file.name}</p>
+                    <p className="text-[11px] text-slate-400">{Math.round(file.size / 1024)} KB</p>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => removeImage(index)}
+                    className="rounded-full border border-white/20 px-2 py-1 text-[11px] font-semibold uppercase tracking-wide text-slate-200 transition hover:border-white hover:bg-white/10 hover:text-white"
+                    aria-label={`Remove ${file.name}`}
+                  >
+                    Remove
+                  </button>
+                </li>
+              );
+            })}
           </ul>
         )}
       </div>
