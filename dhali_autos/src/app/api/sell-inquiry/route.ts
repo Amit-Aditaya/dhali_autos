@@ -1,27 +1,24 @@
 import { NextRequest, NextResponse } from 'next/server';
-import nodemailer from 'nodemailer';
+import { Resend } from 'resend';
 
 export const runtime = 'nodejs';
 
 const REQUIRED_FIELDS = ['fullName', 'email', 'phone', 'carMake', 'carModel', 'carYear', 'mileage'];
 
-const getTransporter = () => {
-  const host = process.env.SMTP_HOST;
-  const port = Number(process.env.SMTP_PORT || 587);
-  const user = process.env.SMTP_USER;
-  const pass = process.env.SMTP_PASS;
-  const secure = process.env.SMTP_SECURE === 'true' || port === 465;
-
-  if (!host || !user || !pass) {
-    throw new Error('Email service is not configured. Please set SMTP_HOST, SMTP_USER, and SMTP_PASS environment variables.');
+const getResendClient = () => {
+  const apiKey = process.env.RESEND_API_KEY;
+  if (!apiKey) {
+    throw new Error('Email service is not configured. Please set the RESEND_API_KEY environment variable.');
   }
+  return new Resend(apiKey);
+};
 
-  return nodemailer.createTransport({
-    host,
-    port,
-    secure,
-    auth: { user, pass }
-  });
+const getRecipients = () => {
+  const recipientList = process.env.RESEND_SELL_INQUIRY_TO || 'amit.aditaya99@gmail.com';
+  return recipientList
+    .split(',')
+    .map(address => address.trim())
+    .filter(Boolean);
 };
 
 export async function POST(request: NextRequest) {
@@ -47,19 +44,24 @@ export async function POST(request: NextRequest) {
     if (!images.length) {
       return NextResponse.json({ message: 'Please attach at least one vehicle image.' }, { status: 400 });
     }
-
     const attachments = await Promise.all(
       images.map(async (file, index) => {
         const arrayBuffer = await file.arrayBuffer();
+        const buffer = Buffer.from(arrayBuffer);
         return {
           filename: file.name || `vehicle-image-${index + 1}`,
-          content: Buffer.from(arrayBuffer),
-          contentType: file.type || 'application/octet-stream'
+          content: buffer.toString('base64'),
+          type: file.type || 'application/octet-stream'
         };
       })
     );
 
-    const transporter = getTransporter();
+    const resend = getResendClient();
+    const recipients = getRecipients();
+
+    if (!recipients.length) {
+      throw new Error('Email recipient is not configured. Please set RESEND_SELL_INQUIRY_TO.');
+    }
 
     const htmlMessage = `
       <h2>New Sell Your Car Submission</h2>
@@ -74,15 +76,19 @@ export async function POST(request: NextRequest) {
       ${payload.additionalDetails ? `<p><strong>Additional details:</strong><br/>${payload.additionalDetails.replace(/\n/g, '<br/>')}</p>` : ''}
     `;
 
-    await transporter.sendMail({
-      to: 'amit.aditaya99@gmail.com',
-      from: process.env.SMTP_FROM || payload.email,
-      replyTo: payload.email,
+    const { error } = await resend.emails.send({
+      to: recipients,
+      from: process.env.RESEND_FROM || 'Dhali Autos <onboarding@resend.dev>',
+      reply_to: payload.email,
       subject: `Sell your car enquiry - ${payload.carMake} ${payload.carModel}`,
       text: `New sell enquiry from ${payload.fullName} (${payload.email})\nPhone: ${payload.phone}\n${payload.city ? `City: ${payload.city}\n` : ''}Vehicle: ${payload.carMake} ${payload.carModel} (${payload.carYear})\nMileage: ${payload.mileage}\n${payload.condition ? `Condition: ${payload.condition}\n` : ''}${payload.askingPrice ? `Asking price: ${payload.askingPrice}\n` : ''}${payload.additionalDetails ? `\nAdditional details:\n${payload.additionalDetails}` : ''}`,
       html: htmlMessage,
       attachments
     });
+
+    if (error) {
+      throw new Error(error.message);
+    }
 
     return NextResponse.json({ message: 'Submission received.' });
   } catch (error) {
