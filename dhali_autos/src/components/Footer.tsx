@@ -1,4 +1,7 @@
+'use client';
+
 import Link from 'next/link';
+import { useState, type FormEvent } from 'react';
 
 const quickLinks = [
   { label: 'About', href: '#about' },
@@ -47,6 +50,43 @@ const socials = [
 ];
 
 export default function Footer() {
+  const [email, setEmail] = useState('');
+  const [message, setMessage] = useState('');
+  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (!email.trim()) {
+      setStatus('error');
+      setMessage('Please enter a valid email address.');
+      return;
+    }
+
+    setStatus('loading');
+    setMessage('');
+
+    try {
+      const response = await fetch('/api/keep-in-touch', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: email.trim() })
+      });
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data?.message || 'Something went wrong.');
+      }
+
+      setStatus('success');
+      setMessage(data?.message || 'Thanks for reaching out!');
+      setEmail('');
+    } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : 'Unable to submit your request right now.';
+      setStatus('error');
+      setMessage(errorMessage);
+    }
+  };
+
   return (
     <footer className="text-white pt-12 pb-4">
       <div className="max-w-7xl mx-auto px-6">
@@ -103,23 +143,35 @@ export default function Footer() {
 
           <div className="basis-[29%] min-w-[200px]">
             <h3 className="text-2xl font-bold mb-6">Keep In Touch</h3>
-            <form className="mb-6">
+            <form className="mb-6" onSubmit={handleSubmit}>
               <div className="flex">
                 <input
                   type="email"
                   placeholder="Enter Your Mail"
                   required
+                  value={email}
+                  onChange={event => setEmail(event.target.value)}
                   className="bg-transparent border border-gray-600 text-white outline-none flex-grow px-4 py-2 placeholder:text-gray-400"
                 />
                 <button
                   type="submit"
                   className="shrink-0 w-12 h-12 rounded border border-white/50 bg-charcoal text-white hover:bg-[#1a1a1a] transition"
+                  disabled={status === 'loading'}
                   aria-label="Submit email"
                 >
-                  Go
+                  {status === 'loading' ? '...' : 'Go'}
                 </button>
               </div>
             </form>
+            {message && (
+              <p
+                className={`mb-4 text-sm ${status === 'success' ? 'text-emerald-400' : 'text-red-400'}`}
+                role="status"
+                aria-live="polite"
+              >
+                {message}
+              </p>
+            )}
             <p className="mb-6 text-justify text-gray-300">
               Join the Dhali Autos circle for launch previews, limited allocations, and private driving events curated for our clients.
             </p>

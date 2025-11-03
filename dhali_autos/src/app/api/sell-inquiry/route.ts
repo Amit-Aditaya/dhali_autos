@@ -14,11 +14,21 @@ const getResendClient = () => {
 };
 
 const getRecipients = () => {
-  const recipientList = process.env.RESEND_SELL_INQUIRY_TO || 'amit.aditaya99@gmail.com';
-  return recipientList
+  const recipientList = process.env.RESEND_SELL_INQUIRY_TO;
+  if (!recipientList) {
+    throw new Error('Email recipient is not configured. Please set RESEND_SELL_INQUIRY_TO.');
+  }
+
+  const parsed = recipientList
     .split(',')
     .map(address => address.trim())
     .filter(Boolean);
+
+  if (!parsed.length) {
+    throw new Error('Email recipient is not configured. Please set RESEND_SELL_INQUIRY_TO.');
+  }
+
+  return parsed;
 };
 
 export async function POST(request: NextRequest) {
@@ -44,6 +54,14 @@ export async function POST(request: NextRequest) {
     if (!images.length) {
       return NextResponse.json({ message: 'Please attach at least one vehicle image.' }, { status: 400 });
     }
+    const totalBytes = images.reduce((sum, file) => sum + file.size, 0);
+    const maxPayloadBytes = 35 * 1024 * 1024;
+    if (totalBytes > maxPayloadBytes) {
+      return NextResponse.json(
+        { message: 'Total image size must stay under 35 MB. Please remove or compress some files.' },
+        { status: 400 }
+      );
+    }
     const attachments = await Promise.all(
       images.map(async (file, index) => {
         const arrayBuffer = await file.arrayBuffer();
@@ -51,7 +69,7 @@ export async function POST(request: NextRequest) {
         return {
           filename: file.name || `vehicle-image-${index + 1}`,
           content: buffer.toString('base64'),
-          type: file.type || 'application/octet-stream'
+          content_type: file.type || 'application/octet-stream'
         };
       })
     );
@@ -76,7 +94,7 @@ export async function POST(request: NextRequest) {
       ${payload.additionalDetails ? `<p><strong>Additional details:</strong><br/>${payload.additionalDetails.replace(/\n/g, '<br/>')}</p>` : ''}
     `;
 
-    const { error } = await resend.emails.send({
+    const { data, error } = await resend.emails.send({
       to: recipients,
       from: process.env.RESEND_FROM || 'Dhali Autos <onboarding@resend.dev>',
       reply_to: payload.email,
@@ -89,6 +107,8 @@ export async function POST(request: NextRequest) {
     if (error) {
       throw new Error(error.message);
     }
+
+    console.log('Sell inquiry email queued', { id: data?.id, recipients: recipients.join(', ') });
 
     return NextResponse.json({ message: 'Submission received.' });
   } catch (error) {

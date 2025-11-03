@@ -18,6 +18,8 @@ const initialFormValues = {
   additionalDetails: ''
 };
 
+const MAX_TOTAL_UPLOAD_BYTES = 35 * 1024 * 1024; // 35 MB safety margin under Resend/Vercel limits
+
 export default function SellForm() {
   const [values, setValues] = useState(initialFormValues);
   const [images, setImages] = useState<File[]>([]);
@@ -34,19 +36,30 @@ export default function SellForm() {
       return;
     }
 
+    setStatus('idle');
+    setErrorMessage('');
+
     const incomingFiles = Array.from(fileList);
 
     setImages(prevImages => {
       const merged = [...prevImages, ...incomingFiles];
       const unique: File[] = [];
       const seen = new Set<string>();
+      let totalBytes = 0;
 
       for (const file of merged) {
         const identifier = `${file.name}-${file.size}-${file.lastModified}`;
         if (seen.has(identifier)) continue;
         seen.add(identifier);
         unique.push(file);
+        totalBytes += file.size;
         if (unique.length === 10) break;
+      }
+
+      if (totalBytes > MAX_TOTAL_UPLOAD_BYTES) {
+        setStatus('error');
+        setErrorMessage('Total image size must stay under 35 MB. Please remove or compress some files.');
+        return prevImages;
       }
 
       return unique;
@@ -55,6 +68,8 @@ export default function SellForm() {
 
   const removeImage = (index: number) => {
     setImages(prevImages => prevImages.filter((_, i) => i !== index));
+    setStatus('idle');
+    setErrorMessage('');
   };
 
   const resetForm = () => {
