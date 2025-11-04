@@ -12,7 +12,9 @@ export const metadata: Metadata = {
   title: 'DhaliAutos',
   description: 'DhaliAutos | Curated luxury automobiles tailored for Dhaka city life.',
   icons: {
-    icon: '/favicon.ico'
+    icon: '/images/dhali_autos_logo.png',
+    shortcut: '/images/dhali_autos_logo.png',
+    apple: '/images/dhali_autos_logo.png'
   }
 };
 
