@@ -8,7 +8,7 @@ const stats = [
 
 export default function Hero() {
   return (
-    <section className="relative overflow-hidden pt-40 pb-28 md:pt-48">
+    <section className="relative flex min-h-screen items-center overflow-hidden">
       <div className="absolute inset-0">
         <video
           className="h-full w-full object-cover opacity-80"
@@ -21,19 +21,19 @@ export default function Hero() {
         <div className="absolute inset-0 bg-gradient-to-br from-slate-950/85 via-slate-950/60 to-slate-950" />
       </div>
 
-      <div className="container-responsive relative z-10">
+      <div className="container-responsive relative z-10 py-24 md:py-32">
         <div className="grid gap-12 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)] lg:items-center">
           <div>
             <p className="mb-4 inline-flex items-center rounded-full bg-white/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.4em] text-sky-200">
               Performance · Luxury · Precision
             </p>
-            <h1 className="text-4xl font-semibold  text-white md:text-6xl" style={{ lineHeight: '1.25' }}>
-              Finest Luxury Car Studio in Bangladesh
+            <h1 className="text-4xl font-semibold  text-white md:text-4xl" style={{ lineHeight: '1.25' }}>
+              The Leading Luxury Car Studio in Bangladesh
             </h1>
             <p className="mt-6 max-w-2xl text-base text-slate-200 md:text-lg">
-              From sourcing rare imports to maintaining pristine condition, Dhali Autos pairs curated
+              {/* From sourcing rare imports to maintaining pristine condition, Dhali Autos pairs curated
               vehicles with concierge-style ownership. Our studio elevates every handover into a tailored
-              moment worth remembering - Because luxury deserves experience.
+              moment worth remembering - Because luxury deserves experience. */}
             </p>
 
             <div className="mt-10 flex flex-col gap-4 sm:flex-row">
